@@ -5,9 +5,9 @@ name: Deploy to firebase
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build_and_deploy:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci
-      - run: npm run build
+      - run: CI='' npm run build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0 
         with:
