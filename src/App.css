@@ -1,38 +1,215 @@
+/** General styles */
 .App {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  margin: 0;
   min-height: 100vh;
+  width: 100%;
+  color: black;
+}
+
+.AppDark {
+  color: white;
+  background-color: rgb(15, 10, 48);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.AppDark h1 {
+  color: rgb(255, 255, 255);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 20px;
+}
+
+.toggle-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 20px;
+}
+
+.copyright {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+/** End General styles */
+
+/** App styles (Header) */
+.Header-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Page-header {
+  margin: 20px 0 20px 700px;
+}
+
+.settings-button {
+  margin: 30px;
+}
+/** End App styles (Header) */
+
+/** Dashboard styles */
+#Dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+/* #Dashboard ul {
+  padding: 30px;
+  border: solid 2px;
+  border-radius: 5px;
+} */
+
+#log-in-button {
+  margin: 40px;
+}
+/** End Dashboard styles */
+
+/* formik components styles (login, register)  */
+.formik form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.formik form input{
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgb(0, 0, 0); 
+  margin: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.formik form label{
+  font-size: large;
+  font-weight: 500;
+  margin-top: 10px;
 }
+
+.submit-button {
+  background-color: rgb(192, 192, 192);
+  padding: 9px 30px;
+  border: none;
+  border-radius: 5px;
+  margin: 30px;
+  font-weight: 600;
+  font-size: large;
+}
+
+.submit-button:hover {
+  background-color: rgb(178, 178, 178);
+}
+
+.register-login-div {
+  margin-top: 50px;
+  font-size: large;
+  font-weight: 500;
+}
+
+/* End formik components styles (login, register)  */
+
+/* taskList component styles */
+.task-list {
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.task-list-item {
+  padding: 10px;
+  width: 48%;
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+
+.task-list h3 {
+  color: rgb(186, 123, 46);
+  padding: 10px 0 20px 0;
+}
+
+.create-new-task-formik {
+  margin-top: -80px;
+}
+
+.create-new-task-formik label {
+  margin: 20px 0 10px 0;
+}
+
+.task-action {
+  cursor: pointer;
+}
+/* End taskList component styles */
+
+/* task table component styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  min-height: 385px;
+}
+
+th, td {
+  padding: 10px;
+  vertical-align: top;
+  font-size: 20px;
+}
+
+.bi-trash {
+  padding: 10px;
+}
+.bi-toggle-on {
+  padding: 10px;
+}
+.bi-toggle-off {
+  padding: 10px;
+}
+
+.taskCompleted {
+  color: green;
+  text-decoration: line-through;
+}
+
+.badge {
+  font-size: 18px;
+}
+
+.taskPennding {
+  color: rgb(255, 149, 0);
+}
+
+.column1 {
+  width: 20%;
+}
+
+.column2 {
+  width: 38%;
+}
+
+.column3 {
+  width: 14%;
+}
+
+.column4 {
+  width: 18%;
+}
+
+/* End task table component styles */
