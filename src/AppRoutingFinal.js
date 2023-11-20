@@ -37,7 +37,7 @@ function AppRoutingFinal() {
     return (
       <div className={`${Appmode ? 'AppDark ' : 'App'}`}>
         <div className='Header-box'>
-          <h1 className='Page-header'>Task administrator v2.1</h1>
+          <h1 className='Page-header'>Task administrator v2.2</h1>
           <motion.button
             whileHover={{scale: 1.1}}
             className='settings-button btn btn-info'
