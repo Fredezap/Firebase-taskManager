@@ -4,19 +4,8 @@ import PropTypes from 'prop-types';
 import { Task } from "../../models/task.class";
 import { LEVELS } from "../../models/levels.enum";
 
-const TaskComponent = ({ task, completeTask, deleteTask }) => {
+const TaskComponent = ({ task, updateTask, deleteTask }) => {
 
-    // useEffect(() => {
-    //     console.log('Tarea creada')
-    //     return () => {
-    //         console.log(`Tarea: ${task.name} va a ser desmontada`)
-    //     };
-    // }, [task]);
-
-    /**
-    * Function that returns a Badge
-    * depending on the level of the task
-    */
     function taskLevelBadge(){
         switch (task.level) {
             case LEVELS.NORMAL:
@@ -28,6 +17,11 @@ const TaskComponent = ({ task, completeTask, deleteTask }) => {
             default:
                 break
         }
+    }
+
+    const completeTask = (task) => {
+        task.completed = !task.completed;
+        updateTask(task);
     }
 
     /**
@@ -77,8 +71,8 @@ const TaskComponent = ({ task, completeTask, deleteTask }) => {
 
 TaskComponent.propTypes = {
     task: PropTypes.instanceOf(Task).isRequired,
-    complete: PropTypes.func.isRequired,
-    delete: PropTypes.func,
+    updateTask: PropTypes.func.isRequired,
+    deleteTask: PropTypes.func.isRequired,
 };
 
 

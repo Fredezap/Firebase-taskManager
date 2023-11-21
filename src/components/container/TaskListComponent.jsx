@@ -7,50 +7,56 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import TaskForm from '../pure/forms/taskForm'
 import TaskFormik from '../pure/forms/taskFormik'
+import { addNewTask, getAllTasks, deleteTaskById, updateTaskbyId } from './../../firebase/taskController'
 
 const TaskListComponent = () => {
     
-    const defaultTask1 = new Task('Example 1', 'Description 1', false, LEVELS.NORMAL);
-    const defaultTask2 = new Task('Example 2', 'Description 2', true, LEVELS.URGENT);
-    const defaultTask3 = new Task('Example 3', 'Description 3', false, LEVELS.BLOCKING);
-
-    const allTasks = [defaultTask1, defaultTask2, defaultTask3]
+    const allTasks = []
 
     const [tasks, setTasks] = useState(allTasks);
     const [loading, setLoading] = useState(true);
 
-    // useEffect(() => {
-    //     console.log('Modificacion de tareas')
-    //     setLoading(false)
-    //     return () => {
-    //         console.log('Componente de Lista de tareas va a ser desmontado')
-    //     };
-    // }, [tasks]);
+    useEffect(() => {
+        getTasks();
+    }, []);
+    
+    const tasksAsClassObjects = (tasksFromFirebase) => {
+        const newArrayTasks = tasksFromFirebase.map((t) => {
+            const newTask = new Task(t.id, t.name, t.description, t.completed, t.level);
+            return newTask;
+        });
+        return newArrayTasks;
+    };
+    
+    const getTasks = async () => {
+        const tasksFromFirebase = await getAllTasks();
+        const tasksAsObjects = tasksAsClassObjects(tasksFromFirebase);
+        setTasks([...allTasks, ...tasksAsObjects]);
+    };
+    
 
-    function completeTask (task) {
-        console.log('cambiando una tarea', task)
-        const index = tasks.indexOf(task);
-        const allTasks2 = [...tasks]
-        tasks[index].completed = !tasks[index].completed
-        setTasks(allTasks2)
-        console.log('tarea cambiada creo', task)
+    function updateTask (task) {
+        updateTaskbyId(task.toObject())
+        .then(async () => {
+            getTasks();
+        })
+        .catch(e => console.error(e))
     }
 
     function deleteTask (task) {
-        console.log('eliminando una tarea', task)
-        const index = tasks.indexOf(task);
-        const allTasks2 = [...tasks]
-        allTasks2.splice(index,1);
-        setTasks(allTasks2)
-        console.log('tarea eliminada creo', task)
+        deleteTaskById(task.id)
+        .then(async => {
+            getTasks();
+        })
+        .catch(e => console.error(e))
     }
 
-    function addTask (task) {
-        console.log('agregando una tarea', task)
-        const allTasks2 = [...tasks]
-        allTasks2.push(task);
-        setTasks(allTasks2)
-        console.log('tarea agregada creo', task)
+    function addTask(task) {
+        addNewTask(task.toObject())
+            .then(async () => {
+                getTasks();
+            })
+            .catch(e => console.error(e));
     }
 
     const Table = () => {
@@ -70,7 +76,7 @@ const TaskListComponent = () => {
                             <TaskComponent 
                             key ={ index }
                             task={ task }
-                            completeTask={ completeTask }
+                            updateTask={ updateTask }
                             deleteTask={ deleteTask }>
                             </TaskComponent>                                
                         )

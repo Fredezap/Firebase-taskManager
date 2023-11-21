@@ -31,8 +31,8 @@ const TaskFormik = ({add}) => {
             values.name,
             values.description,
             false,
-            values.level,
-        );
+            values.level
+        )
         await add(newTask);
     }
 
@@ -62,6 +62,8 @@ const TaskFormik = ({add}) => {
                     handleChange }) => (
                         <Form className='d-flex justify-content-center align-items-center addTaskForm'>
                         <div className='form-outline flex-fill'>
+                        {!isSubmitting ? (
+                            <div>
                         <label htmlFor="name">Name</label>
                         <Field id="name" name="name" placeholder="Your name" type="text" className='form-control form-control-lg'/>
 
@@ -96,7 +98,8 @@ const TaskFormik = ({add}) => {
                         { errors.level && touched.level && ( <ErrorMessage style={ErrorMessageStyle} name="level" component="div"></ErrorMessage> ) }
                         
                         <button type="submit" className="btn btn-primary btn-lg ms-2 add-botton">Create new task</button>
-                        {isSubmitting ? "Creating new task" : null}
+                        </div>) :
+                        (<div>Creando la nueva tarea</div>)}
                         </div>
                         </Form> 
                     )}
